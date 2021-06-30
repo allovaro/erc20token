@@ -25,12 +25,14 @@ contract("Token sale tests", async accounts => {
   it('should be possible to buy tokens', async() => {
     let tokenInstance = await Token.deployed();
     let tokenSaleInstance = await TokenSale.deployed();
-    let balanceBefore = tokenInstance.balanceOf(deployerAccount);
+    let balanceBefore = await tokenInstance.balanceOf(deployerAccount);
 
     expect(tokenSaleInstance.sendTransaction({
       from: deployerAccount,
       value: web3.utils.toWei('1', 'wei')
     })).to.be.fulfilled;
-    return expect(tokenInstance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(balanceBefore.add(new BN(1)));
+    console.log(balanceBefore);
+    balanceBefore = balanceBefore.add(new BN(1));
+    return expect(tokenInstance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(balanceBefore);
   });
 });
