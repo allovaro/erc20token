@@ -1,9 +1,12 @@
-pragma solidity ^0.8.4;
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity 0.6.1;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 
-contract MyToken is ERC20 {
-  constructor( uint256 initialSupply) ERC20("StarDucks Capu-Token", "SCT") public {
+contract MyToken is ERC20, ERC20Detailed {
+  constructor( uint256 initialSupply) ERC20Detailed("StarDucks Capu-Token", "SCT", 0) public {
     _mint(msg.sender, initialSupply);
   }
 }
